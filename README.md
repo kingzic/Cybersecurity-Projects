@@ -1,11 +1,7 @@
- **Simulating attacks** 
-
 #  Simulating Attacks and Defending Against Them
 
 ##  Objective
 The goal of this project was to simulate **network attacks** such as ARP spoofing and ping floods in a virtual environment using Kali Linux as the attacker and Ubuntu as the defender, and then analyze **detection** and **mitigation techniques**.
-
----
 
 ## Tools Used
 - **VirtualBox or VMware** – virtualization software  
@@ -15,25 +11,22 @@ The goal of this project was to simulate **network attacks** such as ARP spoofin
 - **Wireshark** – installed on Ubuntu (for packet analysis)  
 - **hping3** – used for aggressive flooding attacks  
 
----
-
 ## Project Setup
 1. Install **Kali Linux** and **Ubuntu** on VirtualBox (or VMware).  
 2. Configure both systems to be on the **same network** (NAT or Host-Only).  
    - Example IPs:  
      - Kali Linux (attacker): `192.168.1.10`  
-     - Ubuntu (defender): `192.168.1.20`  
+     - Ubuntu (defender): `192.168.1.20`
+    
 3. Verify connectivity between machines:  
    ```bash
    ping 192.168.1.20   # from attacker to victim
    ping 192.168.1.10   # from victim to attacker
-````
 
- Successful pings confirm communication.
+## Successful pings confirm communication.
 
 ![Ping Test](images/ping-test.png)
 
----
 
 ##  Simulating Attacks
 
@@ -41,13 +34,11 @@ The goal of this project was to simulate **network attacks** such as ARP spoofin
 
 ```bash
 echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
-```
 
 Output `1` means IP forwarding is active.
 
 ![IP Forwarding](images/ip-forwarding.png)
 
----
 
 ### 2. Install and Use Dsniff (ARP Spoofing)
 
@@ -70,7 +61,7 @@ sudo apt install hping3
 sudo hping3 -1 --flood -p 80 192.168.1.20
 ```
 
-This sends an aggressive flood of ICMP packets to the victim system.
+# This sends an aggressive flood of ICMP packets to the victim system.
 
 ![Flood Attack](images/hping3.png)
 
@@ -85,11 +76,9 @@ sudo iptables -A INPUT -s 192.168.1.10 -p icmp -j DROP
 sudo iptables -L
 ```
 
- This prevents ICMP packets from the attacker, stopping the flood.
+# This prevents ICMP packets from the attacker, stopping the flood.
 
 ![Defense](images/iptables-defense.png)
-
----
 
 ##  Analysis
 
@@ -115,7 +104,4 @@ This project demonstrated a **Man-in-the-Middle (MITM) attack** using ARP spoofi
 * Use a **VPN** when connecting to public Wi-Fi.
 * Deploy **intrusion detection systems (IDS/IPS)** to monitor unusual traffic.
 
----
 
-Would you like me to also create a **short "What I Learnt" section** like the Wazuh project, so both READMEs are consistent for your GitHub portfolio?
-```
