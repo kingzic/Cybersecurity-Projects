@@ -13,7 +13,7 @@ The goal of this project was to simulate **network attacks** such as ARP spoofin
 
 ## Project Setup
 1. Install **Kali Linux** and **Ubuntu** on VirtualBox (or VMware).  
-2. Configure both systems to be on the **same network** (NAT or Host-Only).  
+2. Configure both systems to be on the **same network** (NAT or Host-Only).
    - Example IPs:  
      - Kali Linux (attacker): `192.168.1.10`  
      - Ubuntu (defender): `192.168.1.20`
